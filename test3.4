@@ -1,0 +1,73 @@
+#include<iostream>
+#include<stdio.h>
+#include<stack>
+#include<string.h>
+#include<stdlib.h>
+#include<queue>
+
+using namespace std;
+
+struct node{
+    node *lc;
+    node *rc;
+    char c;
+}tree[50];
+int loc;
+node *creat()
+{
+    tree[loc].lc=NULL;
+    tree[loc].rc=NULL;
+    return &tree[loc++];
+}
+char str1[30];
+char str2[30];
+void postvist(node *t)
+{
+    if(t->lc!=NULL)
+        postvist(t->lc);
+    if(t->rc!=NULL)
+        postvist(t->rc);
+    printf("%c",t->c);
+}
+
+node *build(int s1,int e1,int s2,int e2)
+{
+    node *root=creat();
+    root->c=str1[s1];
+    int pos;
+    for(int i=s2;i<=e2;i++)
+    {
+        if(str2[i]==str1[s1])
+        {
+            pos=i;
+        break;
+        }
+    }
+    if(pos!=s2)
+    {
+        root->lc=build(s1+1,s1+pos-s2,s2,pos-1);
+    }
+    if(pos!=e2)
+    {
+        root->rc=build(s1+pos-s2+1,e1,pos+1,e2);
+    }
+    return root;
+}
+
+int main()
+{
+    while(scanf("%s",str1))
+    {
+        scanf("%s",str2);
+        loc=0;
+        int l1=strlen(str1);
+        int l2=strlen(str2);
+        node *t=build(0,l1-1,0,l2-1);
+        postvist(t);
+        printf("\n");
+    }
+
+
+
+    return 0;
+}
