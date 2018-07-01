@@ -1,0 +1,89 @@
+#include <iostream>
+#include<algorithm>
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+
+int monthdays[2500][13];
+char monthtoname[13][100]={"","January","February","March","April","May","June","July","August","September","October","November","December"};
+char weektoname[8][100]={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+class date
+{
+public:
+    int year;
+    char monthname[100];
+    int month;
+    int day;
+    void nextday()
+    {
+    day++;
+    if(day==monthdays[year][month]+1)
+    {
+        day=1;
+        month++;
+    }
+    if(month==13)
+    {
+        month=1;
+        year++;
+    }
+    }
+};
+
+bool runyear(int year)
+{
+if((year%4==0&&year%100!=0)||(year%4==0&&year%400==0))
+    return 1;
+else
+    return 0;
+}
+
+
+
+
+int main()
+{
+    for (int i=0;i<2500;i++)
+    {
+        monthdays[i][0]=0;//{0,31,28,31,30,31,30,31,31,30,31,30,31};
+        monthdays[i][1]=31;
+        monthdays[i][2]=28;
+        monthdays[i][3]=31;
+        monthdays[i][4]=30;
+        monthdays[i][5]=31;
+        monthdays[i][6]=30;
+        monthdays[i][7]=31;
+        monthdays[i][8]=31;
+        monthdays[i][9]=30;
+        monthdays[i][10]=31;
+        monthdays[i][11]=30;
+        monthdays[i][12]=31;
+        if (runyear(i))
+           monthdays[i][2]++;
+    }
+    date a[2];
+    int days;
+    int t;
+    while(scanf("%d%s%d",&a[0].day,a[0].monthname,&a[0].year))
+    {
+    a[1].year=2018;
+    a[1].month=7;
+    a[1].day=1;
+for(int i=0;i<13;i++)
+{
+    if(strcmp(a[0].monthname,monthtoname[i])==0)
+        a[0].month=i;
+}
+for(int i=0;i<150000;i++)
+{
+    days=i+1;
+   if (a[0].year==a[1].year&&a[0].month==a[1].month&&a[0].day==a[1].day) break;
+     a[0].nextday();
+}
+t=(7-(days+7)%7);
+    printf("%d%s",days,weektoname[t]);
+}
+    return 0;
+}
+
+//30 June 2018
