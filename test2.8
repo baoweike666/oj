@@ -1,0 +1,38 @@
+#include <iostream>
+#include<algorithm>
+#include<stdio.h>
+#include<string.h>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    int h;
+    int t;
+    char a;
+    char b;
+    char c[100][100];
+    char d;
+    while(scanf("%d",&h)==1&&scanf("%s",&a)==1&&scanf("%s",&b)==1)
+    {
+        t=(h+1)/2;
+        for(int i=0;i<t;i++)
+        {
+              d= i%2==1?a:b;
+            for(int k=t-i;k<=t+i;k++)
+            {
+         c[k][t+i]=d;
+           c[t+i][k]=d;
+           c[k][t-i]=d;
+             c[t-i][k]=d;
+            }
+        }
+        for(int i=1;i<=h;i++)
+        {
+        for(int j=1;j<=h;j++)
+        printf("%c",c[i][j]);
+        printf("\n");
+        }
+    }
+    return 0;
+}
