@@ -1,0 +1,31 @@
+#include <iostream>
+#include<algorithm>
+#include<stdio.h>
+#include<string.h>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    int h;
+    int d;
+    while(scanf("%d",&h)==1)
+    {
+        for(int i=1;i<=h;i++)
+        {
+            for(int j=0;j<2*h-2-(i-1)*2;j++)
+            {
+                printf(" ");
+            }
+             for(int j=0;j<h+(i-1)*2;j++)
+             {
+                 printf("*");
+             }
+             printf("\n");
+        }
+    }
+    return 0;
+}
+
+
+
