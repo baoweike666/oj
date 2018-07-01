@@ -1,0 +1,38 @@
+using namespace std;
+
+class student
+{
+public:
+    char name[100];
+    int age;
+    int score;
+};
+bool cmp(student a,student b)
+{
+    if(a.score!=b.score)
+        return a.score<b.score;
+    int tmp=strcmp(a.name,b.name);
+    if(tmp!=0)
+        return tmp<0;
+    else
+        return a.age<b.age;
+}
+
+int main()
+{
+    int n;
+    int i;
+
+while(scanf("%d",&n)==1)
+{
+    student a[100];
+    for(i=0;i<n;i++)
+    {
+        scanf("%s%d%d",a[i].name,&a[i].age,&a[i].score);
+    }
+    sort(a,a+n,cmp);
+    for(i=0;i<n;i++)
+    printf("%s %d %d\n",a[i].name,a[i].age,a[i].score);
+}
+    return 0;
+}
