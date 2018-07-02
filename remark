@@ -1,0 +1,15 @@
+package com.qiu.lin.he;
+ 
+import java.math.BigInteger;
+import java.text.ParseException;
+ 
+public class Ceshi {
+    public static void main(String[] args) throws ParseException {
+ 
+        BigInteger a = new BigInteger("11111111111111111111111111");
+ 
+        int b = a.intValue();//转换成int类型
+        System.out.println(b);
+ 
+    }
+}
