@@ -1,0 +1,62 @@
+#include<iostream>
+#include<stdio.h>
+#include<stack>
+#include<string.h>
+#include<stdlib.h>
+#include<queue>
+
+using namespace std;
+
+int tree[1000];
+class edge
+{
+public:
+    int a;
+    int b;
+    int d;
+};
+bool cmp(edge x,edge y)
+{
+    return x.d<y.d;
+}
+
+int find(int x)
+{
+    if(tree[x]==-1)return x;
+    else
+    return find(tree[x]);
+}
+
+int main()
+{
+    int n;
+while(scanf("%d",&n)==1)
+{
+    edge t[100];
+    int m=n*(n-1)/2;
+    for(int i=0;i<n;i++)
+    {
+        tree[i]=-1;
+    }
+    for(int i=0;i<m;i++)
+    {
+     scanf("%d%d%d",&t[i].a,&t[i].b,&t[i].d);
+    }
+    sort(t,t+m,cmp);
+    int ans=0;
+    for(int i=0;i<m;i++)
+    {
+        t[i].a=find(t[i].a);
+        t[i].b=find(t[i].b);
+        if(t[i].a!=t[i].b)
+        {
+            tree[t[i].a]=t[i].b;
+            ans=ans+t[i].d;
+        }
+    }
+
+printf("%d",ans);
+
+}
+    return 0;
+}
