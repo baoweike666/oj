@@ -42,6 +42,8 @@ while(scanf("%d",&n)==1&&scanf("%d",&m)==1)
     mark[0]=1;
     dis[0]=0;
     int newt=0;
+    for(int k=0;k<n;k++)
+    {
     for(int i=0;i<edge[newt].size();i++)
     {
 
@@ -62,6 +64,8 @@ while(scanf("%d",&n)==1&&scanf("%d",&m)==1)
         newt=j;
 }
 }
+    mark[newt]=1;
+    }
 printf("%d",dis[n-1]);
 
 
