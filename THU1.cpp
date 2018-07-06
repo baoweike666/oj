@@ -1,5 +1,5 @@
-链接：https://www.nowcoder.com/questionTerminal/761fc1e2f03742c2aa929c19ba96dbb0
-来源：牛客网
+// 链接：https://www.nowcoder.com/questionTerminal/761fc1e2f03742c2aa929c19ba96dbb0
+// 来源：牛客网
 
 #include <stdio.h>
 #include <iostream>
