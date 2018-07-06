@@ -44,13 +44,17 @@ int main()
     for(int i=1;i<=n;i++)  //dp[i][j] 前i个草药，容量j
         for(int j=1;j<=c;j++)
         {
+          if(j>=cost[i])
+                       for(int k=0;k*cost[i]<=j;k++)
+                    {
 
-            int max=-1;
-           for(int k=0;k*cost[i]<=j;k++)
-        {
-                    if(dp[i-1][j-k*cost[i]]+k*value[i]>max) max=dp[i-1][j-k*cost[i]]+k*value[i];
-                    dp[i][j]=max;
-        }
+                           {
+                                dp[i][j]=max(dp[i][j],dp[i-1][j-k*cost[i]]+k*value[i]);
+                           }
+
+                    }
+          else
+              dp[i][j]=dp[i-1][j];
         }
 printf("%d",dp[n][c]);
     }
