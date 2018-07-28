@@ -32,7 +32,7 @@ int cmp(rida a,rida b)
 int main()
 {
     int n,d;
-    int tp;
+    int tp=1;
     int ans=0;
     scanf("%d%d",&n,&d);
     for(int i=0;i<n;i++)
@@ -46,7 +46,7 @@ int main()
         if(il[i].y>maxy)maxy=il[i].y;
         if(il[i].y<miny)miny=il[i].y;
     }
-    if(abs(maxy)>d||abs(miny)<d)tp=-1;
+    if(abs(maxy)>d||abs(miny)>d)tp=-1;
     for(int i=0;i<n;i++)
     {
         rl[i].st=il[i].x-sqrt(d*d-il[i].y*il[i].y);
@@ -66,6 +66,9 @@ int main()
            ans++;
        }
     }
+    if(tp==1)
     cout<<ans;
+    else
+    cout<<"Imposible";
     return 0;
 }
