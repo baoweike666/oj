@@ -33,8 +33,8 @@ int main() {
                 while (a[k1+1] == a[i])k1++;
                 while (a[k2-1] == a[j])k2--;
                 ans += (k1 - i + 1) * (k2 - j + 1);
-                i=k1;
-                j=k2;
+                i=k1+1;
+                j=k2-1;
             }
         }
         else if(a[i]+a[j]<m)i++;
