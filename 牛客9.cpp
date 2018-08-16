@@ -1,7 +1,13 @@
-#include<stdio.h>
 #include<iostream>
-#include<cmath>
-#include<algorithm>
+#include<stdio.h>
+#include<stack>
+#include<string>
+#include<stdlib.h>
+#include<queue>
+#include<vector>
+#include <algorithm>
+#include<functional>
+#include <ctype.h>
 using namespace std;
 
 class st{
@@ -19,8 +25,8 @@ int go[4][2]={
 1,0,
 0,1,
 -1,0,
-0,-1,
-}
+0,-1
+};
 
 void dfs(st a)
 {
@@ -30,13 +36,22 @@ for(int i=0;i<=3;i++)
 {
 nx=a.x+go[i][0];
 ny=a.y+go[i][1];
-ncost=a.cost+a.state*maze[nx][ny];
-nstate=ncost%4+1;
 if(nx>=6||ny>=6||nx<=-1||ny<=-1)continue;
 if(mark[nx][ny]==1)continue;
-if(nx=endy&&ny==endy&&ncost<ans)ans=ncost;
+
+ncost=a.cost+a.state*maze[nx][ny];
+nstate=(a.state*maze[nx][ny])%4+1;
+if(nx==endx&&ny==endy&&ncost>=ans)return;
+if(nx==endx&&ny==endy&&ncost<ans){ans=ncost;return;}
+
+
+na.x=nx;
+na.y=ny;
+na.state=nstate;
+na.cost=ncost;
+
 mark[nx][ny]=1;
-dfs(nx,ny);
+dfs(na);
 mark[nx][ny]=-1;
 }
 }
@@ -51,7 +66,7 @@ cin>>maze[i][j];
 }
 cin>>stx>>sty>>endx>>endy;
 
-ans=0;
+ans=100000;
 for(int i=0;i<=5;i++)
 for(int j=0;j<=5;j++)
 {
@@ -66,7 +81,10 @@ a.cost=0;
 
 dfs(a);
 
-cout<<ans;
+if(stx==endx&&sty==endy)cout<<0;
+else
+    cout<<ans;
 
 return 0;
 }
+
