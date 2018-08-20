@@ -1,15 +1,10 @@
 #include<iostream>
 #include<algorithm>
-#include<vector>
-#include<stack>
-#include<map>
 #include<queue>
-#include<cstdio>
-#include<cstring>
-#include<cmath>
+#include<stdio.h>
 using namespace std;
 
-int mark[1001][1001][1001]={0};
+int mark[101][101][101]={0};
 int va,vb,vc;
 
 class st{
@@ -22,26 +17,29 @@ public:
 
 queue<st> q;
 
-void atob(int &a,int &b)
+void atob(int va,int vb,int &a,int &b)
 {
     if(a+b>=vb){a=a-(vb-b);b=vb;}
-    if(a+b<vb){b=a+b;a=0;}
+    else if(a+b<vb){b=a+b;a=0;}
 }
 
 
-int bfs(st x)
+int bfs()
 {
     while(q.empty()!=1)
     {
+        st x=q.front();
         q.pop();
         int na=x.a;
         int nb=x.b;
         int nc=x.c;
         int nt=x.t;
-        atob(na,nb);
+        atob(va,vb,na,nb);
         if(mark[na][nb][nc]==0)
         {
-            if(na==nb&&na==nc)return nt+1;
+            if (2*na == va && 2*nb == va ) return nt+1;
+            if (2*nc == va  && 2*nb == va ) return nt+1;
+            if (2*na == va  && 2*nc == va ) return nt+1;
             mark[na][nb][nc]=1;
             st nx;
             nx.a=na;
@@ -55,10 +53,12 @@ int bfs(st x)
         nb=x.b;
         nc=x.c;
         nt=x.t;
-        atob(nb,na);
+        atob(vb,va,nb,na);
         if(mark[na][nb][nc]==0)
         {
-            if(na==nb&&na==nc)return nt+1;
+            if (2*na == va && 2*nb == va ) return nt+1;
+            if (2*nc == va  && 2*nb == va ) return nt+1;
+            if (2*na == va  && 2*nc == va ) return nt+1;
             mark[na][nb][nc]=1;
             st nx;
             nx.a=na;
@@ -72,10 +72,12 @@ int bfs(st x)
         nb=x.b;
         nc=x.c;
         nt=x.t;
-        atob(na,nc);
+        atob(va,vc,na,nc);
         if(mark[na][nb][nc]==0)
         {
-            if(na==nb&&na==nc)return nt+1;
+            if (2*na == va && 2*nb == va ) return nt+1;
+            if (2*nc == va  && 2*nb == va ) return nt+1;
+            if (2*na == va  && 2*nc == va ) return nt+1;
             mark[na][nb][nc]=1;
             st nx;
             nx.a=na;
@@ -89,10 +91,12 @@ int bfs(st x)
         nb=x.b;
         nc=x.c;
         nt=x.t;
-        atob(nc,na);
+        atob(vc,va,nc,na);
         if(mark[na][nb][nc]==0)
         {
-            if(na==nb&&na==nc)return nt+1;
+            if (2*na == va && 2*nb == va ) return nt+1;
+            if (2*nc == va  && 2*nb == va ) return nt+1;
+            if (2*na == va  && 2*nc == va ) return nt+1;
             mark[na][nb][nc]=1;
             st nx;
             nx.a=na;
@@ -107,10 +111,12 @@ int bfs(st x)
         nb=x.b;
         nc=x.c;
         nt=x.t;
-        atob(nb,nc);
+        atob(vb,vc,nb,nc);
         if(mark[na][nb][nc]==0)
         {
-            if(na==nb&&na==nc)return nt+1;
+            if (2*na == va && 2*nb == va ) return nt+1;
+            if (2*nc == va  && 2*nb == va ) return nt+1;
+            if (2*na == va  && 2*nc == va ) return nt+1;
             mark[na][nb][nc]=1;
             st nx;
             nx.a=na;
@@ -124,10 +130,12 @@ int bfs(st x)
         nb=x.b;
         nc=x.c;
         nt=x.t;
-        atob(nc,nb);
+        atob(vc,vb,nc,nb);
         if(mark[na][nb][nc]==0)
         {
-            if(na==nb&&na==nc)return nt+1;
+            if (2*na == va && 2*nb == va ) return nt+1;
+            if (2*nc == va  && 2*nb == va ) return nt+1;
+            if (2*na == va  && 2*nc == va ) return nt+1;
             mark[na][nb][nc]=1;
             st nx;
             nx.a=na;
@@ -139,6 +147,7 @@ int bfs(st x)
 
 
     }
+    return -1;
 }
 
 
@@ -146,17 +155,19 @@ int bfs(st x)
 int main()
 {
 
-    st x;
     cin>>va>>vb>>vc;
 
+    st x;
     x.a=va;
     x.b=0;
     x.c=0;
     x.t=0;
     q.push(x);
+
     mark[va][0][0]=1;
 
-    int ans=bfs(x);
+    int ans;
+    ans=bfs();
     cout<<ans;
     return 0;
 }
